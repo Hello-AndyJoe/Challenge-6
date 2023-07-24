@@ -8,7 +8,7 @@ function getCity() {
 console.log(searchedCity);
 
 //var locationData = "http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=0d26533ff6995761db8d5944c14153d7";
-var locationData = "http://api.openweathermap.org/geo/1.0/direct?q=" + searchedCity + "&limit=5&appid=0d26533ff6995761db8d5944c14153d7";
+var locationData = "https://api.openweathermap.org/geo/1.0/direct?q=" + searchedCity + "&limit=5&appid=0d26533ff6995761db8d5944c14153d7";
 
 console.log(locationData);
 
@@ -25,7 +25,7 @@ fetch(locationData)
     console.log(userLon);
     
   // var weatherData = "http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=0d26533ff6995761db8d5944c14153d7";
-var weatherData = "http://api.openweathermap.org/data/2.5/forecast?lat=" + userLat + "&lon=" + userLon + "&appid=ab9dfa77307a71dc3740fa52ba330885";
+var weatherData = "https://api.openweathermap.org/data/2.5/forecast?lat=" + userLat + "&lon=" + userLon + "&appid=ab9dfa77307a71dc3740fa52ba330885";
 
 fetch(weatherData)
   .then(function (response) {
