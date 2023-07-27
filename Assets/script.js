@@ -7,6 +7,27 @@ var userLon;
 function getCityInput() {
   searchedCity = document.getElementById("city-search").value;
 
+  if (searchedCity === null || searchedCity === undefined || searchedCity.length <= 0) {
+    return;
+  } else {
+    searchedCities.push(searchedCity);
+    document.getElementById('search-history').innerHTML = "";
+    saveCityHistory();
+    loadCityHistory();
+    loadCity();
+  }
+}
+
+function loadCity() {
+  document.getElementById("city-results").innerHTML = "";
+  document.getElementById("weather-results").innerHTML = "";
+
+  console.log(searchedCity);
+  console.log(searchedCities);
+
+  var locationData = "https://api.openweathermap.org/geo/1.0/direct?q=" + searchedCity + "&limit=5&appid=0d26533ff6995761db8d5944c14153d7";
+  console.log(locationData);
+
   fetch(locationData)
     .then(function (response) {
       return response.json();
@@ -155,17 +176,3 @@ function loadCityHistory() {
 };
 
 loadCityHistory();
-=======
-      console.log(data);
-      console.log(data.city.name);
-      console.log(data.list[i].dt_txt);
-      console.log(data.list[i].wind.speed + " Wind");
-      console.log(data.list[i].main.humidity + "%");
-      console.log(data.list[i].weather[0].main);
-      console.log(tempK + " K");
-      console.log(tempF + " F");
-  }
-  })
-  }
-})
-}
