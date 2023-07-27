@@ -4,23 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Fetch Page</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Assets/style.css">
 </head>
 <body>
     <header>
-        <h1>Test Page</h1>
+        <h1>City Weather Forecast</h1>
     </header>
     <nav>
         <form>
+            <h3>Lookup City</h3>
             <input id="city-search" value="">
-            <button type="button" onclick="getCity()">Search</button>
+            <button type="button" id="search-button" onclick="getCityInput()">Search</button>
         </form>
+        <h3>Previous Searches</h3>
         <div id="search-history"></div>
     </nav>
     <main>
-        <div id="weather-results"></div>
         <div id="city-results"></div>
+        <div id="weather-results"></div>
     </main>
-    <script src="script.js"></script>
+    <script src="Assets/script.js"></script>
 </body>
 </html>
