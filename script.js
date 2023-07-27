@@ -106,7 +106,8 @@ function getForecastWeather() {
           var tempK = data.list[i].main.temp;
           var tempF = (((tempK - 273.15) * (9 / 5) + 32));
           var tempFRounded = Math.round(tempF * 100) / 100;
-          var weatherCond = data.list[i].weather[0].main;//https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
+          var weatherCond = data.list[i].weather[0].main;
+          //https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
           if (weatherCond === "Clear") {
             weatherCond = "Clear \u{2600}";
           } else if (weatherCond === "Clouds") {
