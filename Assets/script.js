@@ -4,12 +4,16 @@ var searchedCities = [];
 var userLat;
 var userLon;
 
+// Get the user input for city search and push it to array
 function getCityInput() {
   searchedCity = document.getElementById("city-search").value;
 
   if (searchedCity === null || searchedCity === undefined || searchedCity.length <= 0) {
-    return;
+    return; // Prevents from pushing empty input
   } else {
+    if (searchedCities.length > 5) {
+      searchedCities.shift();// limits the search history buttons to six buttons
+    }
     searchedCities.push(searchedCity);
     document.getElementById('search-history').innerHTML = "";
     saveCityHistory();
@@ -18,6 +22,7 @@ function getCityInput() {
   }
 }
 
+// Load the value of the user input and use to fetch City location via longitude and latitude
 function loadCity() {
   document.getElementById("city-results").innerHTML = "";
   document.getElementById("weather-results").innerHTML = "";
@@ -40,7 +45,7 @@ function loadCity() {
       console.log(data[0].name + ", " + data[0].state);
       console.log(userLat);
       console.log(userLon);
-
+// Render the name of the first result of the searched city input
       var cityResults = document.getElementById("city-results");
       var cityResultsDiv = document.createElement("div");
       cityResultsDiv.setAttribute("id", "current-day");
@@ -54,6 +59,7 @@ function loadCity() {
     })
 };
 
+// Use the longitude and latitude data found from loadCity function to get current weather conditions of selected city
 function getCurrentWeather() {
   var currentWeatherData = "https://api.openweathermap.org/data/2.5/weather?lat=" + userLat + "&lon=" + userLon + "&appid=ab9dfa77307a71dc3740fa52ba330885";
 
@@ -64,9 +70,9 @@ function getCurrentWeather() {
     .then(function (data) {
       var tempK = data.main.temp;
       var tempF = (((tempK - 273.15) * (9 / 5) + 32));
-      var tempFRounded = Math.round(tempF * 100) / 100;
+      var tempFRounded = Math.round(tempF * 100) / 100;// Turn Kelvin tempature into Fahrenheit.
       var weatherCond = data.weather[0].main;
-      if (weatherCond === "Clear") {
+      if (weatherCond === "Clear") {// Match weather conditions with icons to display.
         weatherCond = "Clear \u{2600}";
       } else if (weatherCond === "Clouds") {
         weatherCond = "Clouds \u{2601}";
@@ -79,7 +85,7 @@ function getCurrentWeather() {
       } else {
         weatherCond = weatherCond + " \u{1F32B}";
       }
-
+// Display current weather conditions
       console.log("test", data);
       var currentDayWeather = document.getElementById('current-day');
       var currentDayWeatherTemp = document.createElement("p");
@@ -94,6 +100,7 @@ function getCurrentWeather() {
     })
 };
 
+//  Use the longitude and latitude data found from loadCity function to get forecasted weather conditions of selected city
 function getForecastWeather() {      
   var weatherData = "https://api.openweathermap.org/data/2.5/forecast?lat=" + userLat + "&lon=" + userLon + "&appid=ab9dfa77307a71dc3740fa52ba330885";
 
@@ -129,7 +136,7 @@ function getForecastWeather() {
           console.log(data.list[i].weather[0].main);
           console.log(tempK + " K");
           console.log(tempF);
-
+// Display forecasted weather conditions
           var weatherResults = document.getElementById("weather-results");
           var weatherResultsDiv = document.createElement("div");
           var weatherResultsDate = document.createElement("h2");
@@ -148,10 +155,12 @@ function getForecastWeather() {
     })
 };
 
+// Save array that had the city value pushed to it to localstorage
 function saveCityHistory() {
   localStorage.setItem("searchedCities", JSON.stringify(searchedCities));
 };
 
+// Load the array as it's updated
 function loadCityHistory() {
   var saveSearchedCities = JSON.parse(localStorage.getItem("searchedCities"));
 
@@ -159,7 +168,7 @@ function loadCityHistory() {
     searchedCities = [];
   } else {
     searchedCities = saveSearchedCities;
-
+// Creates the search history buttons and pushes their value to the search input when click and finds the weather information again
     for(var i = 0; i < searchedCities.length; i++ ) {
       var cityButton = document.createElement('button');
       cityButton.textContent =  searchedCities[i];
@@ -174,5 +183,5 @@ function loadCityHistory() {
     }
 }
 };
-
+// Load search history buttons when page loads
 loadCityHistory();
