@@ -20,8 +20,16 @@ h1, h3 {
     text-transform: uppercase;
 }
 
+h1 {
+    font-size: 48px;
+}
+
+h3 {
+    font-size: 32px;
+}
+
 p {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 header {
@@ -39,10 +47,11 @@ form {
 
 form input {
     height: 36px;
-    width: 260px;
+    width: 240px;
     border: none;
     border-bottom: 2px solid #10cf80;
     margin-right: 11px;
+    padding: 2px 12px;
 }
 
 button {
@@ -61,6 +70,11 @@ button:hover {
     transition: .5s ease;
 }
 
+#search-history {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
 #search-history button {
     width: 100%;
     margin-bottom: 12px;
@@ -75,6 +89,11 @@ main {
     background-color: #FEFEFE;
     margin: 18px;
     padding: 12px 18px;
+}
+
+#weather-results div {
+    width: calc(33% - 72px);
+    min-width: 236px;
 }
 
 #weather-results {
